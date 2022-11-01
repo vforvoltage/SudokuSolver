@@ -24,4 +24,22 @@ class BruteForceSolverTest {
         BruteForceSolver.solveSudokuBoard(board);
         Assertions.assertTrue(board.isSolved());
     }
+
+    @Test
+    void solveActual() {
+        SudokuBoard board = new SudokuBoard(new int[][]{
+                {2, 5, 4, 6, 9, 0, 0, 0, 0},
+                {0, 0, 0, 0, 2, 3, 0, 5, 6},
+                {9, 6, 0, 0, 7, 0, 0, 4, 2},
+                {6, 0, 0, 7, 0, 1, 2, 0, 0},
+                {1, 3, 0, 0, 0, 2, 5, 0, 7},
+                {8, 0, 0, 0, 5, 0, 1, 0, 0},
+                {0, 0, 8, 3, 0, 7, 0, 0, 9},
+                {0, 0, 6, 2, 0, 0, 7, 0, 5},
+                {0, 7, 2, 5, 0, 0, 0, 8, 0}
+        });
+        System.out.println(board);
+        BruteForceSolver.solveSudokuBoard(board);
+        Assertions.assertTrue(board.isSolved());
+    }
 }
