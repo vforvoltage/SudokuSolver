@@ -5,24 +5,26 @@ import org.junit.jupiter.api.Test;
 import org.vforvoltage.sudoku.TestBoardHelper;
 import org.vforvoltage.sudoku.model.SudokuBoard;
 
-class BruteForceSolverTest {
+import static org.vforvoltage.sudoku.util.BoardStatusChecker.isSolved;
+
+class BacktrackingSolverTest {
 
     @Test
     void solveSudokuBoard() {
         SudokuBoard board = new SudokuBoard(TestBoardHelper.ALMOST_SOLVED());
         System.out.println(board);
-        BruteForceSolver.solveSudokuBoard(board);
-        Assertions.assertTrue(board.isSolved());
+        BacktrackingSolver.solveSudokuBoard(board);
+        Assertions.assertTrue(isSolved(board));
 
         board = new SudokuBoard(TestBoardHelper.MISSING_DIAGONAL());
         System.out.println(board);
-        BruteForceSolver.solveSudokuBoard(board);
-        Assertions.assertTrue(board.isSolved());
+        BacktrackingSolver.solveSudokuBoard(board);
+        Assertions.assertTrue(isSolved(board));
 
         board = new SudokuBoard(TestBoardHelper.ALL_ZEROS());
         System.out.println(board);
-        BruteForceSolver.solveSudokuBoard(board);
-        Assertions.assertTrue(board.isSolved());
+        BacktrackingSolver.solveSudokuBoard(board);
+        Assertions.assertTrue(isSolved(board));
     }
 
     @Test
@@ -39,8 +41,8 @@ class BruteForceSolverTest {
                 {0, 7, 2, 5, 0, 0, 0, 8, 0}
         });
         System.out.println(board);
-        BruteForceSolver.solveSudokuBoard(board);
-        Assertions.assertTrue(board.isSolved());
+        BacktrackingSolver.solveSudokuBoard(board);
+        Assertions.assertTrue(isSolved(board));
 
         board = new SudokuBoard(new int[][]{
                 {0, 3, 0, 0, 0, 0, 0, 2, 0},
@@ -54,8 +56,8 @@ class BruteForceSolverTest {
                 {0, 0, 2, 7, 5, 0, 0, 0, 6}
         });
         System.out.println(board);
-        BruteForceSolver.solveSudokuBoard(board);
-        Assertions.assertTrue(board.isSolved());
+        BacktrackingSolver.solveSudokuBoard(board);
+        Assertions.assertTrue(isSolved(board));
 
         board = new SudokuBoard(new int[][]{
                 {0, 0, 0, 0, 0, 0, 5, 1, 0},
@@ -69,8 +71,8 @@ class BruteForceSolverTest {
                 {0, 0, 0, 0, 9, 0, 0, 0, 0}
         });
         System.out.println(board);
-        BruteForceSolver.solveSudokuBoard(board);
-        Assertions.assertTrue(board.isSolved());
+        BacktrackingSolver.solveSudokuBoard(board);
+        Assertions.assertTrue(isSolved(board));
 
         board = new SudokuBoard(new int[][]{
                 {8, 0, 0, 0, 0, 0, 0, 0, 0},
@@ -84,7 +86,7 @@ class BruteForceSolverTest {
                 {0, 9, 0, 0, 0, 0, 4, 0, 0}
         });
         System.out.println(board);
-        BruteForceSolver.solveSudokuBoard(board);
-        Assertions.assertTrue(board.isSolved());
+        BacktrackingSolver.solveSudokuBoard(board);
+        Assertions.assertTrue(isSolved(board));
     }
 }

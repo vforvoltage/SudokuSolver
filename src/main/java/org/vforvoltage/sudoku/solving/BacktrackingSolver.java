@@ -3,10 +3,12 @@ package org.vforvoltage.sudoku.solving;
 import org.vforvoltage.sudoku.model.GridCoordinates;
 import org.vforvoltage.sudoku.model.SudokuBoard;
 
-public class BruteForceSolver {
+import static org.vforvoltage.sudoku.util.BoardStatusChecker.isSolved;
+
+public class BacktrackingSolver {
 
     public static boolean solveSudokuBoard(SudokuBoard board) {
-        if(board.isSolved()) {
+        if(isSolved(board)) {
             System.out.println(board);
             return true;
         }
