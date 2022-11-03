@@ -1,13 +1,18 @@
 package org.vforvoltage.sudoku.solving;
 
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.vforvoltage.sudoku.model.GridCoordinates;
 import org.vforvoltage.sudoku.model.SudokuBoard;
 
-public class BruteForceSolver {
+import static org.vforvoltage.sudoku.util.BoardStatusChecker.isSolved;
 
+public class BacktrackingSolver {
+
+    private static final Logger logger = LogManager.getLogger(BacktrackingSolver.class);
     public static boolean solveSudokuBoard(SudokuBoard board) {
-        if(board.isSolved()) {
-            System.out.println(board);
+        if(isSolved(board)) {
+            logger.info(board);
             return true;
         }
 
@@ -18,6 +23,7 @@ public class BruteForceSolver {
                 if(solveSudokuBoard(board)) {
                     return true;
                 } else {
+                    logger.trace(String.format("Resetting %s from %d", startingPoint, i));
                     board.resetCellToZero(startingPoint);
                 }
             }
