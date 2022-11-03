@@ -12,17 +12,14 @@ class BacktrackingSolverTest {
     @Test
     void solveSudokuBoard() {
         SudokuBoard board = new SudokuBoard(TestBoardHelper.ALMOST_SOLVED());
-        System.out.println(board);
         BacktrackingSolver.solveSudokuBoard(board);
         Assertions.assertTrue(isSolved(board));
 
         board = new SudokuBoard(TestBoardHelper.MISSING_DIAGONAL());
-        System.out.println(board);
         BacktrackingSolver.solveSudokuBoard(board);
         Assertions.assertTrue(isSolved(board));
 
         board = new SudokuBoard(TestBoardHelper.ALL_ZEROS());
-        System.out.println(board);
         BacktrackingSolver.solveSudokuBoard(board);
         Assertions.assertTrue(isSolved(board));
     }
@@ -40,7 +37,6 @@ class BacktrackingSolverTest {
                 {0, 0, 6, 2, 0, 0, 7, 0, 5},
                 {0, 7, 2, 5, 0, 0, 0, 8, 0}
         });
-        System.out.println(board);
         BacktrackingSolver.solveSudokuBoard(board);
         Assertions.assertTrue(isSolved(board));
 
@@ -55,7 +51,6 @@ class BacktrackingSolverTest {
                 {0, 0, 0, 9, 6, 0, 4, 0, 0},
                 {0, 0, 2, 7, 5, 0, 0, 0, 6}
         });
-        System.out.println(board);
         BacktrackingSolver.solveSudokuBoard(board);
         Assertions.assertTrue(isSolved(board));
 
@@ -70,7 +65,6 @@ class BacktrackingSolverTest {
                 {0, 0, 0, 0, 0, 0, 0, 3, 1},
                 {0, 0, 0, 0, 9, 0, 0, 0, 0}
         });
-        System.out.println(board);
         BacktrackingSolver.solveSudokuBoard(board);
         Assertions.assertTrue(isSolved(board));
 
@@ -85,7 +79,6 @@ class BacktrackingSolverTest {
                 {0, 0, 8, 5, 0, 0, 0, 1, 0},
                 {0, 9, 0, 0, 0, 0, 4, 0, 0}
         });
-        System.out.println(board);
         BacktrackingSolver.solveSudokuBoard(board);
         Assertions.assertTrue(isSolved(board));
     }

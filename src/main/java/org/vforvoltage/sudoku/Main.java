@@ -1,17 +1,19 @@
 package org.vforvoltage.sudoku;
 
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.vforvoltage.sudoku.model.SudokuBoard;
+import org.vforvoltage.sudoku.solving.BacktrackingSolver;
 
-import static org.vforvoltage.sudoku.util.BoardStatusChecker.isFull;
-import static org.vforvoltage.sudoku.util.BoardStatusChecker.isValid;
 import static org.vforvoltage.sudoku.util.TestBoards.ALL_ZEROS;
 
 public class Main {
+
+    private static final Logger logger = LogManager.getLogger(Main.class);
     public static void main(String[] args) {
-        System.out.println("Hello world!");
+        logger.info("Starting Up");
         SudokuBoard board = new SudokuBoard(ALL_ZEROS());
-        System.out.println(board);
-        System.out.println(isFull(board));
-        System.out.println(isValid(board));
+        BacktrackingSolver.solveSudokuBoard(board);
+        logger.info("Shutting Down");
     }
 }

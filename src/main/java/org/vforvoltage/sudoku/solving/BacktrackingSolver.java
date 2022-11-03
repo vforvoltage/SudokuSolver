@@ -1,5 +1,7 @@
 package org.vforvoltage.sudoku.solving;
 
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.vforvoltage.sudoku.model.GridCoordinates;
 import org.vforvoltage.sudoku.model.SudokuBoard;
 
@@ -7,9 +9,10 @@ import static org.vforvoltage.sudoku.util.BoardStatusChecker.isSolved;
 
 public class BacktrackingSolver {
 
+    private static final Logger logger = LogManager.getLogger(BacktrackingSolver.class);
     public static boolean solveSudokuBoard(SudokuBoard board) {
         if(isSolved(board)) {
-            System.out.println(board);
+            logger.info(board);
             return true;
         }
 
@@ -20,6 +23,7 @@ public class BacktrackingSolver {
                 if(solveSudokuBoard(board)) {
                     return true;
                 } else {
+                    logger.error(String.format("Resetting %s from %d", startingPoint, i));
                     board.resetCellToZero(startingPoint);
                 }
             }
