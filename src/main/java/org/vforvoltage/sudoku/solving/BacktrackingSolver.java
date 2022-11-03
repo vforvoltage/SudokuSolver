@@ -23,7 +23,7 @@ public class BacktrackingSolver {
                 if(solveSudokuBoard(board)) {
                     return true;
                 } else {
-                    logger.error(String.format("Resetting %s from %d", startingPoint, i));
+                    logger.trace(String.format("Resetting %s from %d", startingPoint, i));
                     board.resetCellToZero(startingPoint);
                 }
             }
