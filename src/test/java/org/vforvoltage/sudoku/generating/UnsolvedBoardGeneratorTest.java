@@ -21,13 +21,13 @@ class UnsolvedBoardGeneratorTest {
     void generateUnsolvedBoard() {
         UnsolvedBoardGenerator unsolvedBoardGenerator = new UnsolvedBoardGenerator(new Random(1));
         SudokuBoard sudokuBoard = unsolvedBoardGenerator.generateUnsolvedBoard();
-        logger.warn(sudokuBoard);
+        logger.trace(sudokuBoard);
         BacktrackingSolutionFinder backtrackingSolutionFinder = new BacktrackingSolutionFinder(2);
         int numberOfSolutions = backtrackingSolutionFinder.findNumberOfSolutions(new SudokuBoard(sudokuBoard));
         assertEquals(1, numberOfSolutions);
-        logger.warn(numberOfSolutions + " solutions found");
+        logger.trace(numberOfSolutions + " solutions found");
         BacktrackingSolver.solveSudokuBoard(sudokuBoard);
         assertTrue(isSolved(sudokuBoard));
-        logger.warn(sudokuBoard);
+        logger.trace(sudokuBoard);
     }
 }

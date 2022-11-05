@@ -14,9 +14,10 @@ public class SudokuBoard {
 
     private final int[][] board;
 
-    private final Map<Integer, Set<Integer>> rowValueMap = new HashMap<>();
-    private final Map<Integer, Set<Integer>> columnValueMap = new HashMap<>();
-    private final Map<Integer, Set<Integer>> squareValueMap = new HashMap<>();
+    private final Map<Integer, Set<Integer>> rowEligibleValueMap = new HashMap<>();
+    private final Map<Integer, Set<Integer>> columnEligibleValueMap = new HashMap<>();
+    private final Map<Integer, Set<Integer>> squareEligibleValueMap = new HashMap<>();
+    private final Set<Integer> eligibleVCellValues = new HashSet<>(Arrays.asList(1, 2, 3, 4, 5, 6, 7, 8, 9));
 
     public SudokuBoard(int[][] board) {
         this.board = board;
@@ -28,15 +29,12 @@ public class SudokuBoard {
     }
 
     private void initializeMaps() {
-        rowValueMap.clear();
-        columnValueMap.clear();
-        squareValueMap.clear();
         for (int row = 0; row < 9; row++) {
             for (int column = 0; column < 9; column++) {
                 GridCoordinates cell = GridCoordinates.of(row, column);
-                rowValueMap.computeIfAbsent(row, r -> new HashSet<>()).add(getCell(cell));
-                columnValueMap.computeIfAbsent(column, r -> new HashSet<>()).add(getCell(cell));
-                squareValueMap.computeIfAbsent(cell.square(), r -> new HashSet<>()).add(getCell(cell));
+                rowEligibleValueMap.computeIfAbsent(row, r -> new HashSet<>(eligibleVCellValues)).remove(getCell(cell));
+                columnEligibleValueMap.computeIfAbsent(column, r -> new HashSet<>(eligibleVCellValues)).remove(getCell(cell));
+                squareEligibleValueMap.computeIfAbsent(cell.square(), r -> new HashSet<>(eligibleVCellValues)).remove(getCell(cell));
             }
         }
     }
@@ -53,8 +51,8 @@ public class SudokuBoard {
 
         setCell(coordinates, value);
 
-        if(!isValid(this)) {
-            setCell(coordinates, originalCellValue);
+        if (!isValid(this)) {
+            resetCellToZero(coordinates);
             return false;
         }
 
@@ -63,23 +61,25 @@ public class SudokuBoard {
 
     private void setCell(GridCoordinates coordinates, int value) {
         board[coordinates.row()][coordinates.column()] = value;
-        initializeMaps();
+        rowEligibleValueMap.get(coordinates.row()).remove(value);
+        columnEligibleValueMap.get(coordinates.column()).remove(value);
+        squareEligibleValueMap.get(coordinates.square()).remove(value);
     }
 
     public void resetCellToZero(GridCoordinates coordinates) {
-        setCell(coordinates, 0);
+        int value = getCell(coordinates);
+        board[coordinates.row()][coordinates.column()] = 0;
+        rowEligibleValueMap.get(coordinates.row()).add(value);
+        columnEligibleValueMap.get(coordinates.column()).add(value);
+        squareEligibleValueMap.get(coordinates.square()).add(value);
     }
 
     public List<Integer> getEligibleValuesForCell(GridCoordinates coordinates) {
-        List<Integer> eligibleValues = new ArrayList<>();
-        for (int i = 1; i <= 9; i++) {
-            if (!rowValueMap.get(coordinates.row()).contains(i)
-                    && !columnValueMap.get(coordinates.column()).contains(i)
-                    && !squareValueMap.get(coordinates.square()).contains(i)) {
-                eligibleValues.add(i);
-            }
-        }
-        return eligibleValues;
+        Set<Integer> eligibleValues = new HashSet<>(eligibleVCellValues);
+        eligibleValues.retainAll(rowEligibleValueMap.get(coordinates.row()));
+        eligibleValues.retainAll(columnEligibleValueMap.get(coordinates.column()));
+        eligibleValues.retainAll(squareEligibleValueMap.get(coordinates.square()));
+        return new ArrayList<>(eligibleValues);
     }
 
     @Override
