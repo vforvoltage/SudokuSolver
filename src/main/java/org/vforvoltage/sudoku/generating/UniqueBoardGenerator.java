@@ -21,14 +21,16 @@ public class UniqueBoardGenerator {
     private final SudokuBoard board = new SudokuBoard(ALL_ZEROS());
     private final Random random;
 
+    public UniqueBoardGenerator() {
+        this.random = new Random();
+    }
+
     public UniqueBoardGenerator(Random random) {
         this.random = random;
     }
 
     public SudokuBoard generateUniqueBoard() {
-        int iteration = 1;
         while (!isSolved(board)) {
-            System.out.println(iteration++);
             GridCoordinates randomCell = getRandomUnfilledCell();
             int randomValue = getRandomEligibleValueForCell(randomCell);
             boolean valueSet = board.trySettingCell(randomCell, randomValue);
@@ -36,12 +38,12 @@ public class UniqueBoardGenerator {
                 throw new IllegalStateException("Failed to set a cell to a value that should have been allowed");
             }
 
-            boolean solvable = BacktrackingSolver.solveSudokuBoard(board);
+            boolean solvable = BacktrackingSolver.solveSudokuBoard(new SudokuBoard(board));
             if (!solvable) {
                 board.resetCellToZero(randomCell);
             }
         }
-
+        logger.info(board);
         return board;
     }
 

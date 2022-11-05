@@ -23,6 +23,10 @@ public class SudokuBoard {
         initializeMaps();
     }
 
+    public SudokuBoard(SudokuBoard sudokuBoard) {
+        this(Arrays.stream(sudokuBoard.board).map(int[]::clone).toArray(int[][]::new));
+    }
+
     private void initializeMaps() {
         rowValueMap.clear();
         columnValueMap.clear();
@@ -76,6 +80,22 @@ public class SudokuBoard {
             }
         }
         return eligibleValues;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) {
+            return true;
+        }
+        if (!(o instanceof SudokuBoard that)) {
+            return false;
+        }
+        return Arrays.deepEquals(board, that.board);
+    }
+
+    @Override
+    public int hashCode() {
+        return Arrays.deepHashCode(board);
     }
 
     @Override
