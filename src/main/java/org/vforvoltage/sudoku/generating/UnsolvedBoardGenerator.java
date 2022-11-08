@@ -3,7 +3,7 @@ package org.vforvoltage.sudoku.generating;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.vforvoltage.sudoku.model.GridCoordinates;
-import org.vforvoltage.sudoku.model.SudokuBoard;
+import org.vforvoltage.sudoku.model.OriginalSudokuBoard;
 import org.vforvoltage.sudoku.solving.BacktrackingSolutionFinder;
 
 import java.util.ArrayList;
@@ -21,10 +21,10 @@ public class UnsolvedBoardGenerator {
         this.random = random;
     }
 
-    public SudokuBoard generateUnsolvedBoard() {
+    public OriginalSudokuBoard generateUnsolvedBoard() {
 
         UniqueBoardGenerator uniqueBoardGenerator = new UniqueBoardGenerator(random);
-        SudokuBoard board = uniqueBoardGenerator.generateUniqueBoard();
+        OriginalSudokuBoard board = uniqueBoardGenerator.generateUniqueBoard();
 
         List<GridCoordinates> cells = getCellsInRandomOrder();
 
@@ -32,7 +32,7 @@ public class UnsolvedBoardGenerator {
             int value = board.getCell(cell);
             board.resetCellToZero(cell);
             BacktrackingSolutionFinder solutionFinder = new BacktrackingSolutionFinder(2);
-            if (solutionFinder.findNumberOfSolutions(new SudokuBoard(board)) > 1) {
+            if (solutionFinder.findNumberOfSolutions(new OriginalSudokuBoard(board)) > 1) {
                 board.trySettingCell(cell, value);
             }
         }

@@ -3,7 +3,7 @@ package org.vforvoltage.sudoku.solving;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.vforvoltage.sudoku.model.GridCoordinates;
-import org.vforvoltage.sudoku.model.SudokuBoard;
+import org.vforvoltage.sudoku.model.OriginalSudokuBoard;
 
 import static org.vforvoltage.sudoku.util.BoardStatusChecker.isFull;
 import static org.vforvoltage.sudoku.util.BoardStatusChecker.isSolved;
@@ -20,9 +20,9 @@ public class BacktrackingSolutionFinder {
         this.maxSolutions = maxSolutions;
     }
 
-    public int findNumberOfSolutions(SudokuBoard board) {
+    public int findNumberOfSolutions(OriginalSudokuBoard board) {
 
-        if(isSolved(board)) {
+        if (isSolved(board)) {
             return 1;
         } else if (isFull(board)) {
             return 0;
@@ -30,15 +30,15 @@ public class BacktrackingSolutionFinder {
 
         GridCoordinates startingPoint = findFirstEmptyCoordinates(board);
 
-        for(int i = 1; i <= 9; i++) {
-            if(board.trySettingCell(startingPoint, i)) {
-                if(isSolved(board)) {
+        for (int i = 1; i <= 9; i++) {
+            if (board.trySettingCell(startingPoint, i)) {
+                if (isSolved(board)) {
                     logger.trace("\n%s".formatted(board));
                     foundSolutions++;
                     board.resetCellToZero(startingPoint);
                     return foundSolutions;
                 }
-                if(foundSolutions < maxSolutions) {
+                if (foundSolutions < maxSolutions) {
                     findNumberOfSolutions(board);
                 } else {
                     return foundSolutions;

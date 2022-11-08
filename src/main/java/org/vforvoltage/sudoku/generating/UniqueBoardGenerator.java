@@ -3,7 +3,7 @@ package org.vforvoltage.sudoku.generating;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.vforvoltage.sudoku.model.GridCoordinates;
-import org.vforvoltage.sudoku.model.SudokuBoard;
+import org.vforvoltage.sudoku.model.OriginalSudokuBoard;
 import org.vforvoltage.sudoku.solving.BacktrackingSolver;
 
 import java.util.ArrayList;
@@ -18,7 +18,7 @@ public class UniqueBoardGenerator {
 
     private static final Logger logger = LogManager.getLogger(UniqueBoardGenerator.class);
 
-    private final SudokuBoard board = new SudokuBoard(ALL_ZEROS());
+    private final OriginalSudokuBoard board = new OriginalSudokuBoard(ALL_ZEROS());
     private final Random random;
 
     public UniqueBoardGenerator() {
@@ -29,7 +29,7 @@ public class UniqueBoardGenerator {
         this.random = random;
     }
 
-    public SudokuBoard generateUniqueBoard() {
+    public OriginalSudokuBoard generateUniqueBoard() {
         while (!isSolved(board)) {
             GridCoordinates randomCell = getRandomUnfilledCell();
             int randomValue = getRandomEligibleValueForCell(randomCell);
@@ -38,7 +38,7 @@ public class UniqueBoardGenerator {
                 throw new IllegalStateException("Failed to set a cell to a value that should have been allowed");
             }
 
-            boolean solvable = BacktrackingSolver.solveSudokuBoard(new SudokuBoard(board));
+            boolean solvable = BacktrackingSolver.solveSudokuBoard(new OriginalSudokuBoard(board));
             if (!solvable) {
                 board.resetCellToZero(randomCell);
             }

@@ -10,7 +10,7 @@ import java.util.Set;
 
 import static org.vforvoltage.sudoku.util.BoardStatusChecker.isValid;
 
-public class SudokuBoard {
+public class OriginalSudokuBoard {
 
     private final int[][] board;
 
@@ -19,13 +19,13 @@ public class SudokuBoard {
     private final Map<Integer, Set<Integer>> squareEligibleValueMap = new HashMap<>();
     private final Set<Integer> eligibleVCellValues = new HashSet<>(Arrays.asList(1, 2, 3, 4, 5, 6, 7, 8, 9));
 
-    public SudokuBoard(int[][] board) {
-        this.board = board;
-        initializeMaps();
+    public OriginalSudokuBoard(OriginalSudokuBoard originalSudokuBoard) {
+        this(Arrays.stream(originalSudokuBoard.board).map(int[]::clone).toArray(int[][]::new));
     }
 
-    public SudokuBoard(SudokuBoard sudokuBoard) {
-        this(Arrays.stream(sudokuBoard.board).map(int[]::clone).toArray(int[][]::new));
+    public OriginalSudokuBoard(int[][] board) {
+        this.board = board;
+        initializeMaps();
     }
 
     private void initializeMaps() {
@@ -87,7 +87,7 @@ public class SudokuBoard {
         if (this == o) {
             return true;
         }
-        if (!(o instanceof SudokuBoard that)) {
+        if (!(o instanceof OriginalSudokuBoard that)) {
             return false;
         }
         return Arrays.deepEquals(board, that.board);

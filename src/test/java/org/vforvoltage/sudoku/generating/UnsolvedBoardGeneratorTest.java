@@ -3,7 +3,7 @@ package org.vforvoltage.sudoku.generating;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.junit.jupiter.api.Test;
-import org.vforvoltage.sudoku.model.SudokuBoard;
+import org.vforvoltage.sudoku.model.OriginalSudokuBoard;
 import org.vforvoltage.sudoku.solving.BacktrackingSolutionFinder;
 import org.vforvoltage.sudoku.solving.BacktrackingSolver;
 
@@ -20,14 +20,14 @@ class UnsolvedBoardGeneratorTest {
     @Test
     void generateUnsolvedBoard() {
         UnsolvedBoardGenerator unsolvedBoardGenerator = new UnsolvedBoardGenerator(new Random(1));
-        SudokuBoard sudokuBoard = unsolvedBoardGenerator.generateUnsolvedBoard();
-        logger.trace(sudokuBoard);
+        OriginalSudokuBoard originalSudokuBoard = unsolvedBoardGenerator.generateUnsolvedBoard();
+        logger.trace(originalSudokuBoard);
         BacktrackingSolutionFinder backtrackingSolutionFinder = new BacktrackingSolutionFinder(2);
-        int numberOfSolutions = backtrackingSolutionFinder.findNumberOfSolutions(new SudokuBoard(sudokuBoard));
+        int numberOfSolutions = backtrackingSolutionFinder.findNumberOfSolutions(new OriginalSudokuBoard(originalSudokuBoard));
         assertEquals(1, numberOfSolutions);
         logger.trace(numberOfSolutions + " solutions found");
-        BacktrackingSolver.solveSudokuBoard(sudokuBoard);
-        assertTrue(isSolved(sudokuBoard));
-        logger.trace(sudokuBoard);
+        BacktrackingSolver.solveSudokuBoard(originalSudokuBoard);
+        assertTrue(isSolved(originalSudokuBoard));
+        logger.trace(originalSudokuBoard);
     }
 }

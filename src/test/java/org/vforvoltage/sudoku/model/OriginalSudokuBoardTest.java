@@ -9,11 +9,11 @@ import static org.vforvoltage.sudoku.TestBoardHelper.ALL_ONES;
 import static org.vforvoltage.sudoku.TestBoardHelper.ALL_ZEROS;
 import static org.vforvoltage.sudoku.TestBoardHelper.SOLVED;
 
-class SudokuBoardTest {
+class OriginalSudokuBoardTest {
 
     @Test
     void getEligibleValuesForCell() {
-        SudokuBoard board = new SudokuBoard(ALL_ZEROS());
+        OriginalSudokuBoard board = new OriginalSudokuBoard(ALL_ZEROS());
         for (int row = 0; row < 9; row++) {
             for (int column = 0; column < 9; column++) {
                 List<Integer> eligibleValuesForCell = board.getEligibleValuesForCell(GridCoordinates.of(row, column));
@@ -21,7 +21,7 @@ class SudokuBoardTest {
             }
         }
 
-        board = new SudokuBoard(ALL_ONES());
+        board = new OriginalSudokuBoard(ALL_ONES());
         for (int row = 0; row < 9; row++) {
             for (int column = 0; column < 9; column++) {
                 List<Integer> eligibleValuesForCell = board.getEligibleValuesForCell(GridCoordinates.of(row, column));
@@ -29,7 +29,7 @@ class SudokuBoardTest {
             }
         }
 
-        board = new SudokuBoard(SOLVED());
+        board = new OriginalSudokuBoard(SOLVED());
         for (int row = 0; row < 9; row++) {
             for (int column = 0; column < 9; column++) {
                 List<Integer> eligibleValuesForCell = board.getEligibleValuesForCell(GridCoordinates.of(row, column));
