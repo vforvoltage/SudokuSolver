@@ -2,8 +2,8 @@ package org.vforvoltage.sudoku.solving;
 
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
-import org.vforvoltage.sudoku.TestBoardHelper;
 import org.vforvoltage.sudoku.model.OriginalSudokuBoard;
+import org.vforvoltage.sudoku.testutil.TestBoardHelper;
 
 import static org.vforvoltage.sudoku.util.BoardStatusChecker.isSolved;
 

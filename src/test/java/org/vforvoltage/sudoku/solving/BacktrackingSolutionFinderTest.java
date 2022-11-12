@@ -4,8 +4,8 @@ import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.vforvoltage.sudoku.model.OriginalSudokuBoard;
 
-import static org.vforvoltage.sudoku.TestBoardHelper.ALL_ONES;
-import static org.vforvoltage.sudoku.TestBoardHelper.ALL_ZEROS;
+import static org.vforvoltage.sudoku.testutil.TestBoardHelper.ALL_ONES;
+import static org.vforvoltage.sudoku.testutil.TestBoardHelper.ALL_ZEROS;
 
 class BacktrackingSolutionFinderTest {
 

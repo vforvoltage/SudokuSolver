@@ -5,9 +5,9 @@ import org.junit.jupiter.api.Test;
 
 import java.util.List;
 
-import static org.vforvoltage.sudoku.TestBoardHelper.ALL_ONES;
-import static org.vforvoltage.sudoku.TestBoardHelper.ALL_ZEROS;
-import static org.vforvoltage.sudoku.TestBoardHelper.SOLVED;
+import static org.vforvoltage.sudoku.testutil.TestBoardHelper.ALL_ONES;
+import static org.vforvoltage.sudoku.testutil.TestBoardHelper.ALL_ZEROS;
+import static org.vforvoltage.sudoku.testutil.TestBoardHelper.SOLVED;
 
 class OriginalSudokuBoardTest {
 
