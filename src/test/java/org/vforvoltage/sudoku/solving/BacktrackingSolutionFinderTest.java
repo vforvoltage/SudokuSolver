@@ -2,16 +2,17 @@ package org.vforvoltage.sudoku.solving;
 
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
-import org.vforvoltage.sudoku.model.SudokuBoard;
+import org.vforvoltage.sudoku.model.board.SimpleSudokuBoard;
+import org.vforvoltage.sudoku.model.board.SudokuBoard;
 
-import static org.vforvoltage.sudoku.TestBoardHelper.ALL_ONES;
-import static org.vforvoltage.sudoku.TestBoardHelper.ALL_ZEROS;
+import static org.vforvoltage.sudoku.testutil.TestBoardHelper.ALL_ONES;
+import static org.vforvoltage.sudoku.testutil.TestBoardHelper.ALL_ZEROS;
 
 class BacktrackingSolutionFinderTest {
 
     @Test
     void findNumberOfSolutions() {
-        SudokuBoard board = new SudokuBoard(new int[][]{
+        SudokuBoard board = new SimpleSudokuBoard(new int[][]{
                 {2, 5, 4, 6, 9, 0, 0, 0, 0},
                 {0, 0, 0, 0, 2, 3, 0, 5, 6},
                 {9, 6, 0, 0, 7, 0, 0, 4, 2},
@@ -25,7 +26,7 @@ class BacktrackingSolutionFinderTest {
         BacktrackingSolutionFinder finder = new BacktrackingSolutionFinder(10);
         Assertions.assertEquals(1, finder.findNumberOfSolutions(board));
 
-        board = new SudokuBoard(new int[][]{
+        board = new SimpleSudokuBoard(new int[][]{
                 {0, 3, 0, 0, 0, 0, 0, 2, 0},
                 {0, 0, 4, 0, 0, 0, 7, 8, 9},
                 {6, 1, 0, 0, 0, 0, 0, 0, 0},
@@ -39,7 +40,7 @@ class BacktrackingSolutionFinderTest {
         finder = new BacktrackingSolutionFinder(10);
         Assertions.assertEquals(1, finder.findNumberOfSolutions(board));
 
-        board = new SudokuBoard(new int[][]{
+        board = new SimpleSudokuBoard(new int[][]{
                 {0, 0, 0, 0, 0, 0, 5, 1, 0},
                 {4, 0, 0, 6, 0, 2, 0, 0, 0},
                 {5, 0, 0, 0, 0, 0, 0, 0, 4},
@@ -53,7 +54,7 @@ class BacktrackingSolutionFinderTest {
         finder = new BacktrackingSolutionFinder(10);
         Assertions.assertEquals(1, finder.findNumberOfSolutions(board));
 
-        board = new SudokuBoard(new int[][]{
+        board = new SimpleSudokuBoard(new int[][]{
                 {8, 0, 0, 0, 0, 0, 0, 0, 0},
                 {0, 0, 3, 6, 0, 0, 0, 0, 0},
                 {0, 7, 0, 0, 9, 0, 2, 0, 0},
@@ -67,7 +68,7 @@ class BacktrackingSolutionFinderTest {
         finder = new BacktrackingSolutionFinder(10);
         Assertions.assertEquals(1, finder.findNumberOfSolutions(board));
 
-        board = new SudokuBoard(new int[][]{
+        board = new SimpleSudokuBoard(new int[][]{
                 {2, 9, 5, 7, 4, 3, 8, 6, 1},
                 {4, 3, 1, 8, 6, 5, 9, 0, 0},
                 {8, 7, 6, 1, 9, 2, 5, 4, 3},
@@ -81,11 +82,11 @@ class BacktrackingSolutionFinderTest {
         finder = new BacktrackingSolutionFinder(10);
         Assertions.assertEquals(2, finder.findNumberOfSolutions(board));
 
-        board = new SudokuBoard(ALL_ZEROS());
+        board = new SimpleSudokuBoard(ALL_ZEROS());
         finder = new BacktrackingSolutionFinder(100);
         Assertions.assertEquals(100, finder.findNumberOfSolutions(board));
 
-        board = new SudokuBoard(ALL_ONES());
+        board = new SimpleSudokuBoard(ALL_ONES());
         finder = new BacktrackingSolutionFinder(100);
         Assertions.assertEquals(0, finder.findNumberOfSolutions(board));
     }
