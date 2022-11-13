@@ -2,31 +2,30 @@ package org.vforvoltage.sudoku.solving;
 
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
-import org.vforvoltage.sudoku.model.OriginalSudokuBoard;
+import org.vforvoltage.sudoku.model.board.SimpleSudokuBoard;
+import org.vforvoltage.sudoku.model.board.SudokuBoard;
 import org.vforvoltage.sudoku.testutil.TestBoardHelper;
-
-import static org.vforvoltage.sudoku.util.BoardStatusChecker.isSolved;
 
 class BacktrackingSolverTest {
 
     @Test
     void solveSudokuBoard() {
-        OriginalSudokuBoard board = new OriginalSudokuBoard(TestBoardHelper.ALMOST_SOLVED());
+        SudokuBoard board = new SimpleSudokuBoard(TestBoardHelper.ALMOST_SOLVED());
         BacktrackingSolver.solveSudokuBoard(board);
-        Assertions.assertTrue(isSolved(board));
+        Assertions.assertTrue(board.isSolved());
 
-        board = new OriginalSudokuBoard(TestBoardHelper.MISSING_DIAGONAL());
+        board = new SimpleSudokuBoard(TestBoardHelper.MISSING_DIAGONAL());
         BacktrackingSolver.solveSudokuBoard(board);
-        Assertions.assertTrue(isSolved(board));
+        Assertions.assertTrue(board.isSolved());
 
-        board = new OriginalSudokuBoard(TestBoardHelper.ALL_ZEROS());
+        board = new SimpleSudokuBoard(TestBoardHelper.ALL_ZEROS());
         BacktrackingSolver.solveSudokuBoard(board);
-        Assertions.assertTrue(isSolved(board));
+        Assertions.assertTrue(board.isSolved());
     }
 
     @Test
     void solveActual() {
-        OriginalSudokuBoard board = new OriginalSudokuBoard(new int[][]{
+        SudokuBoard board = new SimpleSudokuBoard(new int[][]{
                 {2, 5, 4, 6, 9, 0, 0, 0, 0},
                 {0, 0, 0, 0, 2, 3, 0, 5, 6},
                 {9, 6, 0, 0, 7, 0, 0, 4, 2},
@@ -38,9 +37,9 @@ class BacktrackingSolverTest {
                 {0, 7, 2, 5, 0, 0, 0, 8, 0}
         });
         BacktrackingSolver.solveSudokuBoard(board);
-        Assertions.assertTrue(isSolved(board));
+        Assertions.assertTrue(board.isSolved());
 
-        board = new OriginalSudokuBoard(new int[][]{
+        board = new SimpleSudokuBoard(new int[][]{
                 {0, 3, 0, 0, 0, 0, 0, 2, 0},
                 {0, 0, 4, 0, 0, 0, 7, 8, 9},
                 {6, 1, 0, 0, 0, 0, 0, 0, 0},
@@ -52,9 +51,9 @@ class BacktrackingSolverTest {
                 {0, 0, 2, 7, 5, 0, 0, 0, 6}
         });
         BacktrackingSolver.solveSudokuBoard(board);
-        Assertions.assertTrue(isSolved(board));
+        Assertions.assertTrue(board.isSolved());
 
-        board = new OriginalSudokuBoard(new int[][]{
+        board = new SimpleSudokuBoard(new int[][]{
                 {0, 0, 0, 0, 0, 0, 5, 1, 0},
                 {4, 0, 0, 6, 0, 2, 0, 0, 0},
                 {5, 0, 0, 0, 0, 0, 0, 0, 4},
@@ -66,9 +65,9 @@ class BacktrackingSolverTest {
                 {0, 0, 0, 0, 9, 0, 0, 0, 0}
         });
         BacktrackingSolver.solveSudokuBoard(board);
-        Assertions.assertTrue(isSolved(board));
+        Assertions.assertTrue(board.isSolved());
 
-        board = new OriginalSudokuBoard(new int[][]{
+        board = new SimpleSudokuBoard(new int[][]{
                 {8, 0, 0, 0, 0, 0, 0, 0, 0},
                 {0, 0, 3, 6, 0, 0, 0, 0, 0},
                 {0, 7, 0, 0, 9, 0, 2, 0, 0},
@@ -80,6 +79,6 @@ class BacktrackingSolverTest {
                 {0, 9, 0, 0, 0, 0, 4, 0, 0}
         });
         BacktrackingSolver.solveSudokuBoard(board);
-        Assertions.assertTrue(isSolved(board));
+        Assertions.assertTrue(board.isSolved());
     }
 }

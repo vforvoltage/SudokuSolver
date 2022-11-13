@@ -82,6 +82,10 @@ public class OriginalSudokuBoard {
         return new ArrayList<>(eligibleValues);
     }
 
+    public int[][] getCopyOfBoardArray() {
+        return Arrays.stream(board).map(int[]::clone).toArray(int[][]::new);
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) {
