@@ -1,8 +1,12 @@
 package org.vforvoltage.sudoku.model;
 
+import static org.vforvoltage.sudoku.model.board.AbstractSudokuBoard.BOARD_SIZE;
+import static org.vforvoltage.sudoku.model.board.AbstractSudokuBoard.BOARD_START_INDEX;
+import static org.vforvoltage.sudoku.model.board.AbstractSudokuBoard.SUBSECTION_SIZE;
+
 public record GridCoordinates(int row, int column) {
     public GridCoordinates {
-        if (row < 0 || row > 8 || column < 0 || column > 8) {
+        if (row < BOARD_START_INDEX || row >= BOARD_SIZE || column < BOARD_START_INDEX || column >= BOARD_SIZE) {
             throw new IllegalArgumentException("Error creating GridCoordinates. Invalid value for row or column: (%d, %d).".formatted(row, column));
         }
     }
@@ -12,6 +16,10 @@ public record GridCoordinates(int row, int column) {
     }
 
     public int square() {
-        return ((row / 3) * 3) + (column / 3);
+        return ((row / SUBSECTION_SIZE) * SUBSECTION_SIZE) + (column / SUBSECTION_SIZE);
+    }
+
+    public GridCoordinates startOfSquare() {
+        return GridCoordinates.of((row / SUBSECTION_SIZE) * SUBSECTION_SIZE, (column / SUBSECTION_SIZE) * SUBSECTION_SIZE);
     }
 }
