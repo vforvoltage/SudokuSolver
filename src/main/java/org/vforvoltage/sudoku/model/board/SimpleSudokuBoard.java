@@ -6,7 +6,7 @@ public class SimpleSudokuBoard extends AbstractSudokuBoard implements SudokuBoar
         super(board);
     }
 
-    public <T extends AbstractSudokuBoard> SimpleSudokuBoard(T sudokuBoard) {
+    public <T extends SudokuBoard> SimpleSudokuBoard(T sudokuBoard) {
         super(sudokuBoard);
     }
 

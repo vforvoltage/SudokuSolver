@@ -21,8 +21,8 @@ public abstract class AbstractSudokuBoard implements SudokuBoard {
     protected final Set<Integer> ELIGIBLE_CELL_VALUES = IntStream.rangeClosed(MIN_VALUE, MAX_VALUE).boxed().collect(Collectors.toSet());
     protected final int[][] board;
 
-    protected <T extends AbstractSudokuBoard> AbstractSudokuBoard(T sudokuBoard) {
-        this(Arrays.stream(sudokuBoard.board).map(int[]::clone).toArray(int[][]::new));
+    protected <T extends SudokuBoard> AbstractSudokuBoard(T sudokuBoard) {
+        this(sudokuBoard.getCopyOfBoardArray());
     }
 
     protected AbstractSudokuBoard(int[][] board) {
@@ -103,8 +103,8 @@ public abstract class AbstractSudokuBoard implements SudokuBoard {
     public List<GridCoordinates> getEmptyCells() {
         List<GridCoordinates> coordinates = new ArrayList<>();
 
-        for (int row = 0; row < 9; row++) {
-            for (int column = 0; column < 9; column++) {
+        for (int row = BOARD_START_INDEX; row < BOARD_SIZE; row++) {
+            for (int column = BOARD_START_INDEX; column < BOARD_SIZE; column++) {
                 GridCoordinates cell = GridCoordinates.of(row, column);
                 if (getCell(cell) == 0) {
                     coordinates.add(cell);
